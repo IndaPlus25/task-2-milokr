@@ -30,7 +30,8 @@
 
 fn main() {
     let n: u32 = 5;
-    let numberSequence: &str = "5 3 2 1 1";
+    let number_sequence_string: &str = "5 3 2 1 1";
+    println!("{:?}", parse_number_sequence(number_sequence_string))
 }
 
 
@@ -38,4 +39,12 @@ fn main() {
 fn divide_by_2(x: u32) -> u32 {
     if x % 2 == 0 {  return x/2;  }
     else {  return (x+1)/2; }
+}
+
+fn parse_number_sequence(numbers_string: &str) -> Vec<u32> {
+    let numbers_vector: Vec<u32> = numbers_string
+    .split_whitespace()
+    .map(|x| x.parse::<u32>().unwrap())
+    .collect();
+    return numbers_vector;
 }
