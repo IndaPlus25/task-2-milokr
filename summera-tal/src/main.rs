@@ -27,11 +27,13 @@
     
      */
 
+use prompted::input;
 
 fn main() {
-    let n: u32 = 5;
-    let number_sequence_string: &str = "5 3 2 1 1";
-    println!("{:?}", parse_number_sequence(number_sequence_string))
+    let number_sequence_string: String = input!("Input list of positive integers (with spaces separating each one): ");
+    let n: u32 = input!("Please input the amount of positive integers in the list you just wrote: ").parse::<u32>().unwrap();
+    println!("{:?}", parse_number_sequence(number_sequence_string)); // for testing
+    println!("{}", n.to_string()) // for testing
 }
 
 
@@ -41,10 +43,10 @@ fn divide_by_2(x: u32) -> u32 {
     else {  return (x+1)/2; }
 }
 
-fn parse_number_sequence(numbers_string: &str) -> Vec<u32> {
+fn parse_number_sequence(numbers_string: String) -> Vec<u32> {
     let numbers_vector: Vec<u32> = numbers_string
     .split_whitespace()
-    .map(|x| x.parse::<u32>().unwrap())
-    .collect();
+    .map(|x| x.parse::<u32>().unwrap())         // inspiration: https://stackoverflow.com/a/34090825 
+    .collect();                                                                 //          ==||==
     return numbers_vector;
 }
