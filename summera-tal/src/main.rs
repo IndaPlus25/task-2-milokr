@@ -1,5 +1,3 @@
-fn main() {
-    
     /*notes:
     input:
     heltal n som anger tal i sekvens
@@ -28,7 +26,9 @@ fn main() {
     print(summa)
     
      */
-    
+
+
+fn main() {
 
 
 }
