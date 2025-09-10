@@ -1,53 +1,34 @@
-    /*notes:
-    input:
-    heltal n som anger tal i sekvens
-    n heltal separerade med space
-
-    output:
-    n/2 största tal ((n+1)/2 om udda)
-
-    (JÄTTE ROUGH) sketch:
-
-    int antalTal(n) {
-    if (n % 2) {    return n/2  }
-    else {  return (n+1)/2   }
-    }
-
-
-    let mut v = listaAvHeltal.parse()
-    v = v.sort()
-
-    let mut summa = 0
-
-    for i in range((v.len() - n), v.len()) {
-        summa = summa + v[i]
-    }
-
-    print(summa)
-    
-     */
-
-use prompted::input;
+use std::io;
 
 fn main() {
-    let number_sequence_string: String = input!("Input list of positive integers (with spaces separating each one): ");
-    let mut n: u32 = input!("Please input the amount of positive integers in the list you just wrote: ").parse::<u32>().unwrap();
+    //  old input macro from external cargo, did not work in kattis so changed to standard std::io
+    // let number_sequence_string: String = input!("Input list of positive integers (with spaces separating each one): ");      
+    // let mut n: u32 = input!("Please input the amount of positive integers in the list you just wrote: ").parse::<u32>().unwrap();
+
+    let mut n_input = String::new();
+    // println!("Please input the amount of integers in the list: ");
+    io::stdin()
+        .read_line(&mut n_input)
+        .expect("Failed to read line");
+
+    let mut n: u32 = n_input
+        .trim()
+        .parse::<u32>()
+        .unwrap();
+
+    let mut number_sequence_string = String::new();
+    // println!("Input list of positive integers (with spaces separating each one): ");
+    io::stdin()
+        .read_line(&mut number_sequence_string)
+        .expect("Failed to read line");
+
     let mut numbers_vector: Vec<u32> = parse_number_sequence(number_sequence_string);
-
-    println!("{:?}", numbers_vector); // for testing
-
     numbers_vector.sort();
-
-    println!("{:?}", numbers_vector); // for testing
-    println!("{}", n.to_string()); // for testing
-
     n = divide_by_2(n);
-
-    println!("{}", n.to_string()); // for testing
 
     let result: u32 = sum_biggest_half(numbers_vector, n);
 
-    println!("{}", result.to_string()); // for testing
+    println!("{}", result.to_string());
 }
 
 
@@ -67,7 +48,10 @@ fn parse_number_sequence(numbers_string: String) -> Vec<u32> {
 
 fn sum_biggest_half(v: Vec<u32>, n: u32) -> u32 {
     let mut sum: u32 = 0;
-    let vector_length: u32 = v.len().try_into().unwrap();   
+    let vector_length: u32 = v
+        .len()
+        .try_into()
+        .unwrap();   
     for i in (vector_length-n)..vector_length {
         sum += v[i as usize];               //  "as usize" comes from this comment https://www.reddit.com/r/rust/comments/385em5/comment/crskat9/
     }
