@@ -29,6 +29,13 @@
 
 
 fn main() {
+    let n: u32 = 5;
+    let numberSequence: &str = "5 3 2 1 1";
+}
 
 
+// divides by 2 but rounds up in case of odd input
+fn divide_by_2(x: u32) -> u32 {
+    if x % 2 == 0 {  return x/2;  }
+    else {  return (x+1)/2; }
 }
