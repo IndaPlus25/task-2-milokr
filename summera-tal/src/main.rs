@@ -32,7 +32,10 @@ use prompted::input;
 fn main() {
     let number_sequence_string: String = input!("Input list of positive integers (with spaces separating each one): ");
     let n: u32 = input!("Please input the amount of positive integers in the list you just wrote: ").parse::<u32>().unwrap();
-    println!("{:?}", parse_number_sequence(number_sequence_string)); // for testing
+    let mut numbers_vector: Vec<u32> = parse_number_sequence(number_sequence_string);
+    println!("{:?}", numbers_vector); // for testing
+    numbers_vector.sort();
+    println!("{:?}", numbers_vector); // for testing
     println!("{}", n.to_string()) // for testing
 }
 
