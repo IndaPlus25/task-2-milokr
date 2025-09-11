@@ -20,6 +20,29 @@
         current_name_pair += 2
     }
 
+    loop in some kind of way to compare the pairs. how tho :(
+
+
+    function to compare the pairs:          // while thinking i realised it might be best to either: just use a vector with all the names, or to make a vector storing all the pairs
+                                            //  ill be writing this function as if we have a vector filled with all our pairs
+
+    list_of_pairs: Vec<Pair> = [pair_1, pair_2 .... pair_n]
+    let mut current_pair: u32 = 0
+    let mut matching_pairs: u32 = 0
+
+    func compare_pairs() {
+        for i in 1..(amount_of_pairs - current_pair_number + 1) {
+            if list_of_pairs[current_pair_number].1 == list_of_pairs[current_pair_number + i].1 { matching pairs += 1; }
+            elif list_of_pairs[current_pair_number].1 == list_of_pairs[current_pair_number + i].2 { matching pairs += 1; }
+            elif list_of_pairs[current_pair_number].2 == list_of_pairs[current_pair_number + i].1 { matching pairs += 1; }
+            elif list_of_pairs[current_pair_number].2 == list_of_pairs[current_pair_number + i].2 { matching pairs += 1; }
+
+        }
+        if current_pair_number < amount_of_pairs {
+
+        }
+    }
+                                HOLY i read the assignment wrong. smh my head
 */
 
 
