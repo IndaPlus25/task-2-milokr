@@ -25,7 +25,7 @@
 
 */
 
-use std::io::{self, Read};
+use std::{collections::HashSet, io::{self, Read}};
 
 type Pair = (String, String);
 
@@ -56,29 +56,9 @@ fn main() {
         pair_vector.push((firstname, lastname));
     }
 
-    let current_pair: usize = 0;
-    let names_to_remove: Vec<usize> = compare_pairs(current_pair, &pair_vector, amount_of_names);
-
-
-
-    for &i in names_to_remove.iter().rev() {        // got help from chatgpt with reversing this (to avoid issues with removing pairs from the vector affecting the index)
-        pair_vector.remove(i);
-    }
+    let set: HashSet<_> = pair_vector.drain(..).collect();          // source: https://www.reddit.com/r/rust/comments/38zzbk/comment/crz84bq/
+    pair_vector.extend(set.into_iter());                                    // my initial solution to this problem was recursive and as a result (i assume) gets very slow when list of names is large.
     
     println!("{:?}", pair_vector.len());
 }
 
-
-fn compare_pairs(current_pair: usize, list_of_pairs: &Vec<Pair>, vector_length: usize) -> Vec<usize> {
-    let mut names_to_remove: Vec<usize> = Vec::new();
-    for i in (current_pair+1)..vector_length {
-        if list_of_pairs[current_pair].0 == list_of_pairs[i].0 &&
-        list_of_pairs[current_pair].1 == list_of_pairs[i].1 {
-            names_to_remove.push(i);
-        }
-    }
-    if current_pair < vector_length {
-        names_to_remove.extend(compare_pairs(current_pair + 1, list_of_pairs, vector_length));
-    }
-    return names_to_remove;
-}
